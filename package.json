@@ -1,5 +1,6 @@
 {
   "name": "numerology",
+  "homepage": "https://vladislav-vaganov.github.io/numerology",
   "version": "0.1.0",
   "private": true,
   "scripts": {
