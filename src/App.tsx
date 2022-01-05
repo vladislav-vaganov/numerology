@@ -1,40 +1,33 @@
 import React from 'react';
-import {Box, Button, List, ListItem, ListItemText, Paper, Typography} from '@mui/material';
+import {AppBar, Box, Toolbar, Typography} from '@mui/material';
+import {Calculator} from './Calculator';
 
 export const App = (): React.ReactElement => (
   <Box
     sx={{
       display: 'flex',
-      boxSizing: 'border-box',
-      p: 2,
+      flexDirection: 'column',
       minHeight: '100vh',
       width: '100%',
       backgroundColor: '#f9fcfd',
     }}
   >
-    <Box sx={{height: '100%', width: '20%'}}>
-      <Typography variant="h6">Нумерология</Typography>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h5" color="inherit" component="div">
+          Нумерология
+        </Typography>
+      </Toolbar>
+    </AppBar>
 
-      <List component="nav">
-        <ListItem button>
-          <ListItemText primary="Люди" />
-        </ListItem>
-        <ListItem button>
-          <ListItemText primary="Даты" />
-        </ListItem>
-      </List>
+    <Box
+      sx={{
+        height: '1px',
+        flexGrow: 1,
+        p: 2,
+      }}
+    >
+      <Calculator />
     </Box>
-
-    <Paper sx={{ml: 2, flexGrow: 1, p: 2}}>
-      <Box sx={{m: 2}}>
-        <Button color="primary" variant="contained" onClick={() => alert('click')}>
-          Button
-        </Button>
-      </Box>
-
-      <Box sx={{m: 2}}>
-        <Typography display="inline">Text</Typography>
-      </Box>
-    </Paper>
   </Box>
 );
