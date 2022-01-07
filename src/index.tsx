@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
+import {LocalizationProvider} from '@mui/lab';
+import ruLocale from 'date-fns/locale/ru';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import {App} from './App';
 
 const theme = createTheme({
@@ -17,9 +20,13 @@ const theme = createTheme({
 const appContainer = document.getElementById('appContainer');
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <>
     <CssBaseline />
-    <App />
-  </ThemeProvider>,
+    <ThemeProvider theme={theme}>
+      <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
+        <App />
+      </LocalizationProvider>
+    </ThemeProvider>
+  </>,
   appContainer,
 );

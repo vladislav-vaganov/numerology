@@ -1,13 +1,9 @@
 import React from 'react';
-import {AppBar, Box, Toolbar, Typography} from '@mui/material';
+import {AppBar, Stack, Toolbar, Typography} from '@mui/material';
 import {Calculator} from './Calculator';
 
 export const App = (): React.ReactElement => (
-  <Box
-    sx={{
-      width: '100%',
-    }}
-  >
+  <Stack spacing={3}>
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h5" color="inherit" component="div">
@@ -17,5 +13,5 @@ export const App = (): React.ReactElement => (
     </AppBar>
 
     <Calculator />
-  </Box>
+  </Stack>
 );
