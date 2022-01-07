@@ -1,11 +1,9 @@
 import React from 'react';
 import {Box, Stack, TextField, Typography} from '@mui/material';
 import {DatePicker} from '@mui/lab';
-import {isValid, isBefore} from 'date-fns';
-
-const MIN_DATE = new Date('01.01.1000');
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const isValidDate = (date: any): boolean => isValid(date) && !isBefore(date, MIN_DATE);
+import {MIN_BIRTH_DATE} from './constants';
+import {isValidBirthDate} from './utils';
+import {PersonalEnergy} from './PersonalEnergy';
 
 export const Calculator = (): React.ReactElement => {
   const [birthDate, setBirthDate] = React.useState<Date | null>(null);
@@ -20,10 +18,10 @@ export const Calculator = (): React.ReactElement => {
           openTo="year"
           views={['year', 'month', 'day']}
           value={birthDate}
-          minDate={MIN_DATE}
+          minDate={MIN_BIRTH_DATE}
           onChange={(date) => {
             setBirthDate(date);
-            if (isValidDate(date)) {
+            if (isValidBirthDate(date)) {
               console.dir(date);
             }
           }}
@@ -32,7 +30,7 @@ export const Calculator = (): React.ReactElement => {
           )}
         />
       </Box>
-      <Box>{isValidDate(birthDate) && <Typography>{birthDate?.toString()}</Typography>}</Box>
+      <PersonalEnergy birthDate={birthDate} />
     </Stack>
   );
 };
