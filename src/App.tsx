@@ -5,11 +5,7 @@ import {Calculator} from './Calculator';
 export const App = (): React.ReactElement => (
   <Box
     sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
       width: '100%',
-      backgroundColor: '#f9fcfd',
     }}
   >
     <AppBar position="static">
@@ -20,14 +16,6 @@ export const App = (): React.ReactElement => (
       </Toolbar>
     </AppBar>
 
-    <Box
-      sx={{
-        height: '1px',
-        flexGrow: 1,
-        p: 2,
-      }}
-    >
-      <Calculator />
-    </Box>
+    <Calculator />
   </Box>
 );

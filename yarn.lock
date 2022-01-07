@@ -934,6 +934,13 @@ async@^2.6.1, async@^2.6.2:
   dependencies:
     lodash "^4.17.14"
 
+babel-plugin-direct-import@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-direct-import/-/babel-plugin-direct-import-1.0.0.tgz#d31eee76b1c359e89f253be10f0a2bbbd1047347"
+  integrity sha512-WQCA5RJz/VVKHoxNKMrXc5YdsWw2d3vN2vrfKMdHLzf3+YROzKtlcZFhRjYx82nd30ijtWD4cxhV7RssUpCfjw==
+  dependencies:
+    resolve "^1.20.0"
+
 babel-plugin-macros@^2.6.1:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-macros/-/babel-plugin-macros-2.8.0.tgz#0f958a7cc6556b1e65344465d99111a1e5e10138"
@@ -3426,7 +3433,7 @@ resolve-from@^5.0.0:
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-5.0.0.tgz#c35225843df8f776df21c57557bc087e9dfdfc69"
   integrity sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
 
-resolve@^1.10.0, resolve@^1.12.0, resolve@^1.9.0:
+resolve@^1.10.0, resolve@^1.12.0, resolve@^1.20.0, resolve@^1.9.0:
   version "1.21.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.21.0.tgz#b51adc97f3472e6a5cf4444d34bc9d6b9037591f"
   integrity sha512-3wCbTpk5WJlyE4mSOtDLhqQmGFi0/TD9VPwmiolnk8U0wRgMEktqCXd3vy5buTO3tljvalNvKrjHEfrd2WpEKA==
