@@ -2,11 +2,11 @@ import React from 'react';
 import {Box, Stack, TextField} from '@mui/material';
 import {DatePicker} from '@mui/lab';
 import {MAX_BIRTH_DATE, MIN_BIRTH_DATE} from './constants';
-import {isValidBirthDate} from './utils';
 import {PersonalEnergy} from './PersonalEnergy';
+import {NullableDate} from './types';
 
 export const Calculator = (): React.ReactElement => {
-  const [birthDate, setBirthDate] = React.useState<Date | null>(null);
+  const [birthDate, setBirthDate] = React.useState<NullableDate>(null);
 
   return (
     <Stack spacing={2} sx={{px: {xs: 2, sm: 3}}}>
@@ -24,9 +24,6 @@ export const Calculator = (): React.ReactElement => {
           maxDate={MAX_BIRTH_DATE}
           onChange={(date) => {
             setBirthDate(date);
-            if (isValidBirthDate(date)) {
-              console.dir(date);
-            }
           }}
           renderInput={(params) => (
             <TextField {...params} inputProps={{...params.inputProps, placeholder: 'дд.мм.гггг'}} />
