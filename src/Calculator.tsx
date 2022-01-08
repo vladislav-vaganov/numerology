@@ -1,7 +1,7 @@
 import React from 'react';
-import {Box, Stack, TextField, Typography} from '@mui/material';
+import {Box, Stack, TextField} from '@mui/material';
 import {DatePicker} from '@mui/lab';
-import {MIN_BIRTH_DATE} from './constants';
+import {MAX_BIRTH_DATE, MIN_BIRTH_DATE} from './constants';
 import {isValidBirthDate} from './utils';
 import {PersonalEnergy} from './PersonalEnergy';
 
@@ -14,11 +14,14 @@ export const Calculator = (): React.ReactElement => {
         <DatePicker
           disableFuture
           label="Дата рождения"
+          cancelText={null}
+          okText="Закрыть"
           mask="__.__.____"
           openTo="year"
           views={['year', 'month', 'day']}
           value={birthDate}
           minDate={MIN_BIRTH_DATE}
+          maxDate={MAX_BIRTH_DATE}
           onChange={(date) => {
             setBirthDate(date);
             if (isValidBirthDate(date)) {
