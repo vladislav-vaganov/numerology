@@ -3,10 +3,6 @@ import {Box, Typography} from '@mui/material';
 import {isValidBirthDate} from './utils';
 import {NullableDate} from './types';
 
-export interface PersonalEnergyProps {
-  birthDate: Date | null;
-}
-
 const getEnergyNumbers = (birthDate: NullableDate): number[] => {
   if (!birthDate || !isValidBirthDate(birthDate)) {
     return [];
@@ -35,11 +31,35 @@ const getEnergyNumbers = (birthDate: NullableDate): number[] => {
   return energyNumbers;
 };
 
-export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactElement => (
-  <Box>
-    <Typography display="inline">Личная энергия: </Typography>
-    <Typography display="inline" color="primary">
-      {getEnergyNumbers(birthDate).join(', ')}
-    </Typography>
-  </Box>
-);
+interface EnergieByYear {
+  year: number;
+  energie: number;
+}
+
+const groupEnergiesByYears = (birthDate: NullableDate, energyNumbers: number[], years: number): EnergieByYear[] => {
+  if (!birthDate || !isValidBirthDate(birthDate)) {
+    return [];
+  }
+
+  const birthYear = birthDate.getFullYear();
+  return Array.from({length: years}, (_, i) => ({year: birthYear + i, energie: energyNumbers[i % 7]}));
+};
+
+export interface PersonalEnergyProps {
+  birthDate: Date | null;
+}
+
+export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactElement => {
+  const energies = getEnergyNumbers(birthDate);
+  const energiesByYears = groupEnergiesByYears(birthDate, energies, 101);
+  console.log(energiesByYears);
+
+  return (
+    <Box>
+      <Typography display="inline">Личная энергия: </Typography>
+      <Typography display="inline" color="primary">
+        {energies.join(', ')}
+      </Typography>
+    </Box>
+  );
+};
