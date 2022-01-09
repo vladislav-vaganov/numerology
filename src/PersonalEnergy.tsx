@@ -76,7 +76,14 @@ export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactEle
             <YAxis scale="linear" domain={[0, 9]} interval={0} tickCount={9} />
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
-            <Area type="monotone" dataKey="energie" stroke="#00838f" fillOpacity={1} fill="url(#colorEnergie)" />
+            <Area
+              type="monotone"
+              dataKey="energie"
+              stroke="#00838f"
+              fillOpacity={1}
+              fill="url(#colorEnergie)"
+              name="Энергия"
+            />
           </AreaChart>
         </Box>
       )}
