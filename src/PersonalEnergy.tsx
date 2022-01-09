@@ -1,8 +1,9 @@
 import React from 'react';
 import {Box, Stack, Typography} from '@mui/material';
+import {Area, AreaChart, CartesianGrid, ReferenceLine, Tooltip, XAxis, YAxis} from 'recharts';
 import {isValidBirthDate} from './utils';
 import {NullableDate} from './types';
-import {Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts';
+import {CURRENT_YEAR} from './constants';
 
 const getEnergyNumbers = (birthDate: NullableDate): number[] => {
   if (!birthDate || !isValidBirthDate(birthDate)) {
@@ -77,13 +78,16 @@ export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactEle
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
             <Area
+              dot
               type="monotone"
               dataKey="energie"
               stroke="#00838f"
               fillOpacity={1}
               fill="url(#colorEnergie)"
               name="Энергия"
+              isAnimationActive={false}
             />
+            <ReferenceLine x={CURRENT_YEAR} stroke="#f50057" />
           </AreaChart>
         </Box>
       )}
