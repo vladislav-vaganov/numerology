@@ -47,6 +47,10 @@ const groupEnergiesByYears = (birthDate: NullableDate, energyNumbers: number[], 
   return Array.from({length: years}, (_, i) => ({year: birthYear + i, energie: energyNumbers[i % 7]}));
 };
 
+const scrollChartToCurrentYear = (): void => {
+  document.getElementById('currentYearReferenceLine')?.scrollIntoView({inline: 'center'});
+};
+
 export interface PersonalEnergyProps {
   birthDate: Date | null;
 }
@@ -59,7 +63,7 @@ export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactEle
     if (!energiesByYears.length) {
       return;
     }
-    document.getElementById('currentYearReferenceLine')?.scrollIntoView({inline: 'center'});
+    scrollChartToCurrentYear();
   }, [energiesByYears]);
 
   return (
