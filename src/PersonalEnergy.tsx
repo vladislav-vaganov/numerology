@@ -55,6 +55,13 @@ export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactEle
   const energies = getEnergyNumbers(birthDate);
   const energiesByYears = groupEnergiesByYears(birthDate, energies, 101);
 
+  React.useEffect(() => {
+    if (!energiesByYears.length) {
+      return;
+    }
+    document.getElementById('currentYearReferenceLine')?.scrollIntoView({inline: 'center'});
+  }, [energiesByYears]);
+
   return (
     <Stack spacing={2}>
       <Box>
@@ -87,7 +94,7 @@ export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactEle
               name="Энергия"
               isAnimationActive={false}
             />
-            <ReferenceLine x={CURRENT_YEAR} stroke="#f50057" />
+            <ReferenceLine x={CURRENT_YEAR} stroke="#f50057" id="currentYearReferenceLine" />
           </AreaChart>
         </Box>
       )}
