@@ -1,11 +1,8 @@
 import React from 'react';
 import {Box, Stack, Typography} from '@mui/material';
-import {Area, AreaChart, CartesianGrid, ReferenceLine, Tooltip, XAxis, YAxis} from 'recharts';
 import {isValidBirthDate} from './utils';
 import {NullableDate} from './types';
-import {CURRENT_YEAR} from './constants';
-
-const CURRENT_YEAR_LINE_ID = 'currentYearReferenceLine';
+import {EnergyByYearsChart} from './EnergyByYearsChart';
 
 const getEnergyNumbers = (birthDate: NullableDate): number[] => {
   if (!birthDate || !isValidBirthDate(birthDate)) {
@@ -35,42 +32,12 @@ const getEnergyNumbers = (birthDate: NullableDate): number[] => {
   return energyNumbers;
 };
 
-interface EnergieByYear {
-  year: number;
-  energie: number;
-}
-
-const groupEnergiesByYears = (
-  birthDate: NullableDate,
-  energyNumbers: number[],
-  yearsCount: number,
-): EnergieByYear[] => {
-  if (!birthDate || !isValidBirthDate(birthDate)) {
-    return [];
-  }
-
-  const birthYear = birthDate.getFullYear();
-  return Array.from({length: yearsCount}, (_, i) => ({year: birthYear + i, energie: energyNumbers[i % 7]}));
-};
-
-const scrollChartToCurrentYear = (): void => {
-  document.getElementById(CURRENT_YEAR_LINE_ID)?.scrollIntoView({inline: 'center'});
-};
-
 export interface PersonalEnergyProps {
-  birthDate: Date | null;
+  birthDate: NullableDate;
 }
 
 export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactElement => {
   const energies = getEnergyNumbers(birthDate);
-  const energiesByYears = groupEnergiesByYears(birthDate, energies, 101);
-
-  React.useEffect(() => {
-    if (!energiesByYears.length) {
-      return;
-    }
-    scrollChartToCurrentYear();
-  }, [energiesByYears]);
 
   return (
     <Stack spacing={2}>
@@ -81,38 +48,7 @@ export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactEle
         </Typography>
       </Box>
 
-      {!!energiesByYears.length && (
-        <Box sx={{overflowX: 'auto', width: '100%'}}>
-          <AreaChart
-            width={4600}
-            height={300}
-            data={energiesByYears}
-            margin={{top: 10, right: 30, left: -40, bottom: 0}}
-          >
-            <defs>
-              <linearGradient id="colorEnergie" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#00838f" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#00838f" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <XAxis dataKey="year" interval={0} />
-            <YAxis scale="linear" domain={[0, 9]} interval={0} tickCount={9} />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Tooltip />
-            <Area
-              dot
-              type="monotone"
-              dataKey="energie"
-              stroke="#00838f"
-              fillOpacity={1}
-              fill="url(#colorEnergie)"
-              name="Энергия"
-              isAnimationActive={false}
-            />
-            <ReferenceLine x={CURRENT_YEAR} stroke="#f50057" id={CURRENT_YEAR_LINE_ID} />
-          </AreaChart>
-        </Box>
-      )}
+      <EnergyByYearsChart birthYear={birthDate && birthDate.getFullYear()} energieNumbers={energies} />
     </Stack>
   );
 };
