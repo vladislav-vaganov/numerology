@@ -1,8 +1,8 @@
 import React from 'react';
 import {Box, Stack, Typography} from '@mui/material';
-import {isValidBirthDate} from './utils';
-import {NullableDate} from './types';
 import {EnergyByYearsChart} from './EnergyByYearsChart';
+import {isValidBirthDate} from '../utils';
+import {NullableDate} from '../types';
 
 const getEnergyNumbers = (birthDate: NullableDate): number[] => {
   if (!birthDate || !isValidBirthDate(birthDate)) {

@@ -4,7 +4,7 @@ import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 import {LocalizationProvider} from '@mui/lab';
 import ruLocale from 'date-fns/locale/ru';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import {App} from './App';
+import {App} from './Components/App';
 
 const theme = createTheme({
   palette: {

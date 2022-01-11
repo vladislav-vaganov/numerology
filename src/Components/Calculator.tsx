@@ -1,9 +1,9 @@
 import React from 'react';
 import {Box, Stack, TextField} from '@mui/material';
 import {DatePicker} from '@mui/lab';
-import {MAX_BIRTH_DATE, MIN_BIRTH_DATE} from './constants';
 import {PersonalEnergy} from './PersonalEnergy';
-import {NullableDate} from './types';
+import {MAX_BIRTH_DATE, MIN_BIRTH_DATE} from '../constants';
+import {NullableDate} from '../types';
 
 export const Calculator = (): React.ReactElement => {
   const [birthDate, setBirthDate] = React.useState<NullableDate>(null);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from '@mui/material';
 import {Area, AreaChart, CartesianGrid, ReferenceLine, Tooltip, XAxis, YAxis} from 'recharts';
-import {CURRENT_YEAR} from './constants';
+import {CURRENT_YEAR} from '../constants';
 
 const CURRENT_YEAR_LINE_ID = 'currentYearReferenceLine';
 const YEARS_COUNT = 101;
