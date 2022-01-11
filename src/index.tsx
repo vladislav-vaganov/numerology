@@ -5,14 +5,15 @@ import {LocalizationProvider} from '@mui/lab';
 import ruLocale from 'date-fns/locale/ru';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import {App} from './Components/App';
+import {COLORS} from './constants';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#00838f',
+      main: COLORS.primary,
     },
     secondary: {
-      main: '#f50057',
+      main: COLORS.secondary,
     },
   },
 });
