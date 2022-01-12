@@ -1,14 +1,8 @@
 import React from 'react';
 import {Box, Stack, Typography} from '@mui/material';
 import {EnergyByYearsChart} from './EnergyByYearsChart';
-import {isValidBirthDate} from '../utils';
-import {NullableDate} from '../types';
 
-const getEnergyNumbers = (birthDate: NullableDate): number[] => {
-  if (!birthDate || !isValidBirthDate(birthDate)) {
-    return [];
-  }
-
+const getEnergyNumbers = (birthDate: Date): number[] => {
   const year = birthDate.getFullYear();
   const product = (birthDate.getDate() * 100 + birthDate.getMonth() + 1) * year;
   const energyNumbers = [...product.toString()].map((n) => +n);
@@ -33,10 +27,10 @@ const getEnergyNumbers = (birthDate: NullableDate): number[] => {
 };
 
 export interface PersonalEnergyProps {
-  birthDate: NullableDate;
+  birthDate: Date;
 }
 
-export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactElement => {
+export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactElement | null => {
   const energies = getEnergyNumbers(birthDate);
 
   return (
@@ -48,7 +42,7 @@ export const PersonalEnergy = ({birthDate}: PersonalEnergyProps): React.ReactEle
         </Typography>
       </Box>
 
-      <EnergyByYearsChart birthYear={birthDate && birthDate.getFullYear()} energieNumbers={energies} />
+      <EnergyByYearsChart birthYear={birthDate.getFullYear()} energieNumbers={energies} />
     </Stack>
   );
 };
