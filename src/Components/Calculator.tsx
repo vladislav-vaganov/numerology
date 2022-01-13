@@ -6,6 +6,7 @@ import {PersonalEnergy} from './PersonalEnergy';
 import {MAX_BIRTH_DATE, MIN_BIRTH_DATE} from '../constants';
 import {NullableDate} from '../types';
 import {isValidBirthDate} from '../utils';
+import {CharacterRing} from './CharacterRing';
 
 export const Calculator = (): React.ReactElement => {
   const [birthDate, setBirthDate] = React.useState<NullableDate>(null);
@@ -35,6 +36,7 @@ export const Calculator = (): React.ReactElement => {
       {birthDate && isValidBirthDate(birthDate) ? (
         <Stack spacing={2}>
           <LifePathNumber birthDate={birthDate} />
+          <CharacterRing birthDate={birthDate} />
           <PersonalEnergy birthDate={birthDate} />
         </Stack>
       ) : null}
