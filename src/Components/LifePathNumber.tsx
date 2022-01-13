@@ -1,6 +1,20 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
-import {calcLifePathNumberWithSteps} from '../utils';
+import {sumDigitsInDate, sumDigitsInNumber} from '../utils';
+
+const calcLifePathNumberWithSteps = (birthDate: Date): number[] => {
+  const result = [];
+
+  let step = sumDigitsInDate(birthDate);
+  result.push(step);
+
+  while (step > 9) {
+    step = sumDigitsInNumber(step);
+    result.push(step);
+  }
+
+  return result;
+};
 
 export interface LifePathNumberProps {
   birthDate: Date;

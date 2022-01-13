@@ -7,6 +7,9 @@ export const isValidBirthDate = (date: any): boolean =>
 
 export const sumDigitsInNumber = (num: number): number => [...`${num}`].reduce((sum, digit) => sum + +digit, 0);
 
+export const sumDigitsInDate = (date: Date): number =>
+  sumDigitsInNumber(date.getDate()) + sumDigitsInNumber(date.getMonth() + 1) + sumDigitsInNumber(date.getFullYear());
+
 export const reduceNumberToDigit = (num: number): number => {
   if (num < 10) {
     return num;
@@ -15,19 +18,4 @@ export const reduceNumberToDigit = (num: number): number => {
   return reduceNumberToDigit(sumDigitsInNumber(num));
 };
 
-export const calcLifePathNumberWithSteps = (birthDate: Date): number[] => {
-  const result = [];
-
-  let step =
-    sumDigitsInNumber(birthDate.getDate()) +
-    sumDigitsInNumber(birthDate.getMonth() + 1) +
-    sumDigitsInNumber(birthDate.getFullYear());
-  result.push(step);
-
-  while (step > 9) {
-    step = sumDigitsInNumber(step);
-    result.push(step);
-  }
-
-  return result;
-};
+export const calcLifePathNumber = (birthDate: Date): number => reduceNumberToDigit(sumDigitsInDate(birthDate));
