@@ -10,12 +10,7 @@ export const sumDigitsInNumber = (num: number): number => [...`${num}`].reduce((
 export const sumDigitsInDate = (date: Date): number =>
   sumDigitsInNumber(date.getDate()) + sumDigitsInNumber(date.getMonth() + 1) + sumDigitsInNumber(date.getFullYear());
 
-export const reduceNumberToDigit = (num: number): number => {
-  if (num < 10) {
-    return num;
-  }
-
-  return reduceNumberToDigit(sumDigitsInNumber(num));
-};
+export const reduceNumberToDigit = (num: number): number =>
+  num > 9 ? reduceNumberToDigit(sumDigitsInNumber(num)) : num;
 
 export const calcLifePathNumber = (birthDate: Date): number => reduceNumberToDigit(sumDigitsInDate(birthDate));
