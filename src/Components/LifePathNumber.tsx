@@ -13,7 +13,7 @@ export const LifePathNumber = ({birthDate}: LifePathNumberProps): React.ReactEle
     <Box>
       <Typography display="inline">Число жизненного пути (ЧЖП): </Typography>
       <Typography display="inline" color="primary">
-        {lifePathNumberWithSteps.join(' ⇨ ')}
+        {lifePathNumberWithSteps.join(' ➞ ')}
       </Typography>
     </Box>
   );
