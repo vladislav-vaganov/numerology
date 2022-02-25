@@ -1,5 +1,6 @@
 import React from 'react';
 import {Box, Stack, TextField} from '@mui/material';
+// import {Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableRow, TextField} from '@mui/material';
 import {DatePicker} from '@mui/lab';
 import {LifePathNumber} from './LifePathNumber';
 import {PersonalEnergy} from './PersonalEnergy';
@@ -38,6 +39,24 @@ export const Calculator = (): React.ReactElement => {
           <LifePathNumber birthDate={birthDate} />
           <CharacterRing birthDate={birthDate} />
           <PersonalEnergy birthDate={birthDate} />
+          {/* <TableContainer component={Paper} sx={{width: 200, backgroundColor: '#f2f2f2'}}>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell variant="head" sx={{backgroundColor: '#cfcfcf'}}>
+                    Header 1
+                  </TableCell>
+                  <TableCell>Cell 1</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" sx={{backgroundColor: '#cfcfcf'}}>
+                    Header 1
+                  </TableCell>
+                  <TableCell>Cell 2</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer> */}
         </Stack>
       ) : null}
     </Stack>
