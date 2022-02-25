@@ -35,5 +35,10 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
   "exclude": ["node_modules", "cypress", "cache"]
 }

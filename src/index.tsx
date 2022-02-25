@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
-import {LocalizationProvider} from '@mui/lab';
-import ruLocale from 'date-fns/locale/ru';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+
 import {App} from './Components/App';
 import {COLORS} from './constants';
 
@@ -24,9 +22,7 @@ ReactDOM.render(
   <>
     <CssBaseline />
     <ThemeProvider theme={theme}>
-      <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
-        <App />
-      </LocalizationProvider>
+      <App />
     </ThemeProvider>
   </>,
   appContainer,
