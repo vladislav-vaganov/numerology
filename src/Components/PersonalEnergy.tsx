@@ -11,15 +11,21 @@ const getEnergyNumbers = (birthDate: Date): number[] => {
     energyNumbers.push(0);
   }
 
-  if (year > 1999) {
-    if (!energyNumbers[2]) {
-      energyNumbers[2] = 7;
+  // special cases:
+  // people whose birth year starts from 2000 and energy numbers contains 3 and more continuous zeros
+  if (year > 1999 && product.toString().includes('000')) {
+    // skip last 2 digits and find start index of zero for replace
+    let index = energyNumbers.length - 3;
+    while(index > 0 && energyNumbers[index] !== 0){
+      index--;
     }
-    if (!energyNumbers[3]) {
-      energyNumbers[3] = 8;
-    }
-    if (!energyNumbers[4]) {
-      energyNumbers[4] = 9;
+
+    // change zeros with digits from 9 and less
+    let digitForReplace = 9;
+    while(index > 0 && energyNumbers[index] === 0){
+      energyNumbers[index] = digitForReplace;
+      digitForReplace--;
+      index--;
     }
   }
 
