@@ -39,18 +39,19 @@ export const EnergyByYearsChart = ({birthYear, energieNumbers}: EnergyByYearsCha
   }, [energiesByYears]);
 
   return !energiesByYears.length ? null : (
-    <Box sx={{overflowX: 'auto', width: '100%'}}>
+    <Box sx={{overflowY:'hidden', overflowX: 'auto', width: '100%'}}>
       {/* hack: sticky y-axis emulation */}
       <AreaChart
         width={25}
-        height={277}
-        margin={{top: 10, right: 0, left: -35, bottom: 7}}
-        style={{position: 'absolute', marginLeft: -5, marginBottom: 23, backgroundColor: COLORS.background, zIndex: 1}}
+        height={300}
+        margin={{top: 10, right: 0, left: -35, bottom: 0}}
+        style={{position: 'absolute', marginLeft: -5, bottom: 11, backgroundColor: COLORS.background, zIndex: 1}}
       >
         <YAxis scale="linear" domain={[0, 9]} interval={0} tickCount={9} />
+        <XAxis dataKey="year" interval={0} />
       </AreaChart>
 
-      <AreaChart width={4600} height={307} data={energiesByYears} margin={{top: 10, right: 30, left: -40, bottom: 0}}>
+      <AreaChart width={4600} height={300} data={energiesByYears} margin={{top: 10, right: 30, left: -40, bottom: 0}}>
         <defs>
           <linearGradient id="colorEnergie" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.8} />
