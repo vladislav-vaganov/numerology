@@ -50,7 +50,7 @@ export const EnergyByYearsChart = ({birthYear, energieNumbers}: EnergyByYearsCha
         <YAxis scale="linear" domain={[0, 9]} interval={0} tickCount={9} />
       </AreaChart>
 
-      <AreaChart width={4600} height={300} data={energiesByYears} margin={{top: 10, right: 30, left: -40, bottom: 0}}>
+      <AreaChart width={4600} height={307} data={energiesByYears} margin={{top: 10, right: 30, left: -40, bottom: 0}}>
         <defs>
           <linearGradient id="colorEnergie" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.8} />
