@@ -14,3 +14,10 @@ export const reduceNumberToDigit = (num: number): number =>
   num > 9 ? reduceNumberToDigit(sumDigitsInNumber(num)) : num;
 
 export const calcLifePathNumber = (birthDate: Date): number => reduceNumberToDigit(sumDigitsInDate(birthDate));
+
+export const calcCharacterRingNumbers = (birthDate: Date): [number, number, number, number] => [
+  reduceNumberToDigit(birthDate.getDate()),
+  reduceNumberToDigit(birthDate.getMonth() + 1),
+  reduceNumberToDigit(birthDate.getFullYear()),
+  calcLifePathNumber(birthDate),
+];

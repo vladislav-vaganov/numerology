@@ -1,18 +1,13 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
-import {calcLifePathNumber, reduceNumberToDigit} from '../utils';
+import {calcCharacterRingNumbers} from '../utils';
 
 export interface CharacterRingProps {
   birthDate: Date;
 }
 
 export const CharacterRing = ({birthDate}: CharacterRingProps): React.ReactElement => {
-  const characterRingNumbers = [
-    reduceNumberToDigit(birthDate.getDate()),
-    reduceNumberToDigit(birthDate.getMonth() + 1),
-    reduceNumberToDigit(birthDate.getFullYear()),
-    calcLifePathNumber(birthDate),
-  ];
+  const characterRingNumbers = calcCharacterRingNumbers(birthDate);
 
   return (
     <Box>
