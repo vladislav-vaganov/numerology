@@ -1,9 +1,8 @@
 import React from 'react';
 import {Box} from '@mui/material';
-import {Area, AreaChart, CartesianGrid, ReferenceLine, Tooltip, XAxis, YAxis} from 'recharts';
+import {Area, AreaChart, Brush, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 import {COLORS, CURRENT_YEAR} from '../constants';
 
-const CURRENT_YEAR_LINE_ID = 'currentYearReferenceLine';
 const YEARS_COUNT = 101;
 
 interface EnergieByYear {
@@ -19,10 +18,6 @@ const groupEnergiesByYears = (birthYear: number | null, energyNumbers: number[])
   return Array.from({length: YEARS_COUNT}, (_, i) => ({year: birthYear + i, energie: energyNumbers[i % 7]}));
 };
 
-const scrollChartToCurrentYear = (): void => {
-  document.getElementById(CURRENT_YEAR_LINE_ID)?.scrollIntoView({inline: 'center'});
-};
-
 interface EnergyByYearsChartProps {
   birthYear: number | null;
   energieNumbers: number[];
@@ -31,27 +26,24 @@ interface EnergyByYearsChartProps {
 export const EnergyByYearsChart = ({birthYear, energieNumbers}: EnergyByYearsChartProps): React.ReactElement | null => {
   const energiesByYears = groupEnergiesByYears(birthYear, energieNumbers);
 
-  React.useEffect(() => {
-    if (!energiesByYears.length) {
-      return;
+  let startIndex, endIndex;
+  if (birthYear){
+    let startYear = CURRENT_YEAR - 3;
+    if (startYear < birthYear){
+      startYear = birthYear
     }
-    scrollChartToCurrentYear();
-  }, [energiesByYears]);
+    if (startYear > birthYear + YEARS_COUNT - 7)
+    {
+      startYear = birthYear + YEARS_COUNT - 7
+    }
+    startIndex = startYear - birthYear;
+    endIndex = startIndex + 6;
+  }
 
   return !energiesByYears.length ? null : (
-    <Box sx={{overflowY:'hidden', overflowX: 'auto', width: '100%'}}>
-      {/* hack: sticky y-axis emulation */}
-      <AreaChart
-        width={25}
-        height={300}
-        margin={{top: 10, right: 0, left: -35, bottom: 0}}
-        style={{position: 'absolute', marginLeft: -5, bottom: 11, backgroundColor: COLORS.background, zIndex: 1}}
-      >
-        <YAxis scale="linear" domain={[0, 9]} interval={0} tickCount={9} />
-        <XAxis dataKey="year" interval={0} />
-      </AreaChart>
-
-      <AreaChart width={4600} height={300} data={energiesByYears} margin={{top: 10, right: 30, left: -40, bottom: 0}}>
+    <Box sx={{width:"100%", maxWidth: "1000px", height: "350px"}}>
+      <ResponsiveContainer width="100%" height="100%">
+      <AreaChart data={energiesByYears} margin={{top: 10, right: 30, left: -40, bottom: 0}}>
         <defs>
           <linearGradient id="colorEnergie" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.8} />
@@ -72,8 +64,10 @@ export const EnergyByYearsChart = ({birthYear, energieNumbers}: EnergyByYearsCha
           name="Энергия"
           isAnimationActive={false}
         />
-        <ReferenceLine x={CURRENT_YEAR} stroke={COLORS.secondary} id={CURRENT_YEAR_LINE_ID} />
+        <ReferenceLine x={CURRENT_YEAR} stroke={COLORS.secondary} />
+        <Brush dataKey="year" height={30} stroke={COLORS.primary} startIndex={startIndex} endIndex={endIndex}/>
       </AreaChart>
+      </ResponsiveContainer>
     </Box>
   );
 };
